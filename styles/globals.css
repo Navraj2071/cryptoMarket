@@ -1,4 +1,4 @@
-html,
+/* html,
 body {
   padding: 0;
   margin: 0;
@@ -13,4 +13,129 @@ a {
 
 * {
   box-sizing: border-box;
+} */
+
+@import url("https://cdn.jsdelivr.net/gh/yegor256/tacit@gh-pages/tacit-css-1.5.5.min.css");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
+:root {
+  --clr1: #1a1a1d;
+  --clr2: #4e4e50;
+  --clr3: #6f2232;
+  --clr4: #950740;
+  --clr5: #c3073f;
+}
+:root {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+  /* align-items: stretch; */
+  overflow-wrap: break-word;
+}
+body {
+  padding: 0;
+  font-family: "Manrope";
+}
+
+.SearchBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  min-height: 500px;
+}
+.titleSection {
+  font-family: "Press Start 2P", cursive;
+  background-color: var(--clr1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr5);
+  min-height: 500px;
+  text-align: center;
+}
+
+.connectButton {
+  position: fixed;
+  padding: 20px;
+  right: 0px;
+}
+
+.sellerFunctionPage {
+  /* font-family: "Manrope", sans-serif; */
+
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--clr4);
+  padding: 20px;
+}
+
+.sellerFunctions {
+  display: grid;
+  width: 100vw;
+  grid-template-columns: 1fr 1fr;
+}
+
+.sellerfunction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.sellerFunctionPage h2 {
+  color: white;
+}
+.sellerFunctionPage h1 {
+  color: var(--clr1);
+  /* font-weight: 600; */
+  font-weight: 900;
+}
+
+.inputform {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--clr3);
+  color: white;
+  padding: 20px;
+}
+
+.inputform form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.closeButton {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+
+.cardholder {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  background-color: white;
+}
+
+.card {
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+.card h2 {
+  color: var(--clr5);
 }
