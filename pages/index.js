@@ -6,7 +6,7 @@ import Contract from "web3-eth-contract";
 import React from "react";
 
 export default function Home() {
-  const myAddress = "0xFA70BD0B560fC85A60Ad8C437a8aea7c43936a8a";
+  const myAddress = "0xa29457a812eb5cc2ad4ea52b62d1f8a1922306ac";
   const { account, chainId, activateBrowserWallet, deactivate } = useEthers();
   const [isConnected, setIsConnected] = useState(false);
   const formPageArray = {
@@ -38,7 +38,7 @@ export default function Home() {
   // getting Product data from server
 
   const getProductData = async () => {
-    let response = await fetch("/api/apitest").then((resp) => {
+    let response = await fetch("/api/updateDatabase").then((resp) => {
       return resp.json();
     });
     setProductData({ ...response["response"] });
@@ -151,15 +151,16 @@ export default function Home() {
         myContract.methods
           .createProduct(productName, productDescription, productQuantity)
           .send({ from: account })
-          .on("receipt", (receipt) => {
-            console.log(receipt);
-          })
           .on("error", (error) => {
             setStatus(error["message"]);
             setCanCreate(true);
           })
           .then((resp) => {
-            setStatus("Product created successfully. Product Id: ");
+            let createdProductId =
+              resp["events"]["productCreated"]["returnValues"][0];
+            setStatus(
+              "Product created successfully. Product Id: " + createdProductId
+            );
             setCanSell(true);
           })
           .catch((err) => {
@@ -205,7 +206,7 @@ export default function Home() {
                 <h2 style={{ color: "white" }}>Put it up for sale.</h2>
                 <button
                   onClick={() => {
-                    setFormPage(formPageArray[0]);
+                    setFormPage(formPageArray[2]);
                   }}
                 >
                   Sell
@@ -249,9 +250,6 @@ export default function Home() {
         myContract.methods
           .putUpForSale(productId, productPrice, launchTime)
           .send({ from: account })
-          .on("receipt", (receipt) => {
-            console.log(receipt);
-          })
           .on("error", (error) => {
             setStatus(error["message"]);
             setCanSell(true);
@@ -364,7 +362,6 @@ export default function Home() {
             .getProductSaleData(searchQuery)
             .call()
             .then((resp) => {
-              console.log(resp);
               tempObject["availability"] = resp[0];
               tempObject["floorPrice"] = parseInt(resp[1]) / 10 ** 18;
               let launchDate = new Date(resp[2] * 1000);
@@ -450,9 +447,6 @@ export default function Home() {
         myContract.methods
           .placeBid(productId)
           .send({ from: account, value: bidAmount })
-          .on("receipt", (receipt) => {
-            console.log(receipt);
-          })
           .on("error", (error) => {
             setStatus(error["message"]);
             setCanBid(true);
@@ -547,7 +541,6 @@ export default function Home() {
             .getProductSaleData(searchQuery)
             .call()
             .then((resp) => {
-              console.log(resp);
               tempObject["availability"] = resp[0];
               tempObject["floorPrice"] = parseInt(resp[1]) / 10 ** 18;
               let launchDate = new Date(resp[2] * 1000);
@@ -618,9 +611,6 @@ export default function Home() {
       myContract.methods
         .closeBid(productId)
         .send({ from: account })
-        .on("receipt", (receipt) => {
-          console.log(receipt);
-        })
         .on("error", (error) => {
           setStatus(error["message"]);
           setCanBid(true);

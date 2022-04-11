@@ -3,7 +3,7 @@ import Contract from "web3-eth-contract";
 import marketContract from "../../marketContract";
 import database from "../../database.json";
 
-const myAddress = "0xFA70BD0B560fC85A60Ad8C437a8aea7c43936a8a";
+const myAddress = "0xa29457a812eb5cc2ad4ea52b62d1f8a1922306ac";
 Contract.setProvider(
   "https://rinkeby.infura.io/v3/9e6f288e4614414ba79396ab95fa410a"
 );
